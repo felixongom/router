@@ -1,0 +1,21 @@
+{
+    "name": "ongom/router",
+    "description": "A PHP library for routing",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Router\\": "src/Router"
+        }
+    },
+    "authors": [
+        {
+            "name": "ongom felix"
+        }
+    ],
+    "minimum-stability": "stable", 
+    "keywards":["router","route","static route menthods"],
+    "require": {
+        "bramus/router": "^1.6"
+    }
+}
