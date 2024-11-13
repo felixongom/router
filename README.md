@@ -41,8 +41,8 @@ composer require ongom/router ~1.6
 
 
 ```php
-// Require composer autoloader
 use Router\Route;
+// Require composer autoloader
 require __DIR__ . '/vendor/autoload.php';
 
 Route::get('/home', function(){
@@ -227,10 +227,10 @@ Route::get('/blog(/\d{4}(/\d{2}(/\d{2}(/[a-z0-9_-]+)?)?)?)?', function($year = n
 
 ### Subrouting / Mounting Routes
 
-Use `Route::mount($baseroute, $fn)` to mount a collection of routes onto a subroute pattern. The subroute pattern is prefixed onto all following routes defined in the scope. e.g. Mounting a callback `$fn` onto `/movies` will prefix `/movies` onto all following routes.
+Use `Route::group($baseroute, $fn)` to mount a collection of routes onto a subroute pattern. The subroute pattern is prefixed onto all following routes defined in the scope. e.g. Mounting a callback `$fn` onto `/movies` will prefix `/movies` onto all following routes.
 
 ```php
-Route::mount('/movies', function() use ($router) {
+Route::group('/movies', function(){
 
     // will result in '/movies/'
     Route::get('/', function() {
@@ -305,7 +305,7 @@ The 404 handler will be executed when no route pattern was matched to the curren
 💡 You can also manually trigger the 404 handler by calling `Route::trigger404()`
 
 ```php
-Route::get('/([a-z0-9-]+)', function($id) use ($router) {
+Route::get('/([a-z0-9-]+)', function($id) {
     if (!Posts::exists($id)) {
         Route::trigger404();
         return;
@@ -374,7 +374,7 @@ Route::get('/hello', function() { echo 'Hello!'; });
 
 - If your were to place this file _(along with its accompanying `.htaccess` file or the like)_ at the document root level (e.g. `public_html/index.php`), `ongom/router` will mount all routes onto the domain root (e.g. `/`) and thus respond to `https://www.example.org/` and `https://www.example.org/hello`.
 
-- If you were to move this file _(along with its accompanying `.htaccess` file or the like)_ into a subfolder (e.g. `public_html/demo/index.php`), `ongom/router` will mount all routes onto the current path (e.g. `/demo`) and thus repsond to `https://www.example.org/demo` and `https://www.example.org/demo/hello`. There's **no** need for `Route::mount(…)` in this case.
+- If you were to move this file _(along with its accompanying `.htaccess` file or the like)_ into a subfolder (e.g. `public_html/demo/index.php`), `ongom/router` will mount all routes onto the current path (e.g. `/demo`) and thus repsond to `https://www.example.org/demo` and `https://www.example.org/demo/hello`. There's **no** need for `Route::group(…)` in this case.
 
 #### Disabling subfolder support
 
@@ -399,14 +399,14 @@ Integrate other libraries with `ongom/router` by making good use of the `use` ke
 ```php
 $tpl = new \Acme\Template\Template();
 
-Route::get('/', function() use ($tpl) {
+Route::get('/', function(){
     $tpl->load('home.tpl');
     $tpl->setdata(array(
         'name' => 'Bramus!'
     ));
 });
 
-Route::run(function() use ($tpl) {
+Route::run(function(){
     $tpl->display();
 });
 ```
@@ -450,13 +450,3 @@ To achieve this, `ongom/router` but will internally re-route `HEAD` requests to 
 
   The included `composer.json` will also install `php-code-coverage` which allows one to generate a __Code Coverage Report__. Run `phpunit --coverage-html ./tests-report` (XDebug required), a report will be placed into the `tests-report` subfolder.
 
-
-## Acknowledgements
-
-`ongom/router` is inspired upon [Klein](https://github.com/chriso/klein.php), [Ham](https://github.com/radiosilence/Ham), and [JREAM/route](https://bitbucket.org/JREAM/route) . Whilst Klein provides lots of features it is not object oriented. Whilst Ham is Object Oriented, it's bad at _separation of concerns_ as it also provides templating within the routing class. Whilst JREAM/route is a good starting point it is limited in what it does (only GET routes for example).
-
-
-
-## License
-
-`ongom/router` is released under the MIT public license. See the enclosed `LICENSE` for details.
