@@ -27,16 +27,6 @@ A lightweight and simple object oriented PHP Router.It users bramus/router in th
 - [URL Rewriting](https://gist.github.com/bramus/5332525)
 
 
-
-## Installation
-
-Installation is possible using Composer
-
-```
-composer require ongom/router ~1.6
-```
-
-
 ## Usage
 
 
