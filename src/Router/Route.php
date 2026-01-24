@@ -1,6 +1,6 @@
 <?php
 
-namespace Router;
+namespace Ongom\Router;
 
 use Bramus\Router\Router;
 

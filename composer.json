@@ -5,7 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Router\\": "src/Router"
+            "Ongom\\Router\\": "src/Router"
         }
     },
     "authors": [

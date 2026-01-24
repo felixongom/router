@@ -31,7 +31,7 @@ A lightweight and simple object oriented PHP Router.It users bramus/router in th
 
 
 ```php
-use Router\Route;
+use Ongom\Router\Route;
 // Require composer autoloader
 require __DIR__ . '/vendor/autoload.php';
 
