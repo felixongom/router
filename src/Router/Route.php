@@ -72,7 +72,7 @@ class Route{
     //set 404 method
     public static function set404(string $path, $callback = null){
         self::initRoute();
-        if($callback == null && is_string($path)){
+        if(!is_string($path)){
             self::$Router->set404($path);
         }else{
             self::$Router->set404($path, $callback);
